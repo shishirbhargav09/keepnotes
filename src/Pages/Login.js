@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
 import { HiLockClosed} from "react-icons/hi";
 import { MdEmail} from "react-icons/md";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function Login() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const loginHandler=(e) => {
+        // e.preventDefault();
+        axios.post('http://localhost:3000/login', {
+        
+            email: email,
+            password: password
+          })
+          .then(function (response) {
+            console.log(response);
+            toast.success("Successfully Login");
+
+          })
+          .catch(function (error) {
+            console.log(error);
+            toast.error("Wrong Credintials")
+          });
+        
+    }
   return (
     <Container>
       <FormContainer>
@@ -17,19 +40,19 @@ function Login() {
 <MdEmail style={{
         fontSize:"2rem"
       }}/>
-<input type="email" placeholder="Email"/>
+<input type="email" placeholder="Email" value={email} onChange={(e) => { setEmail(e.target.value) }}/>
       </div>
       <div className="email">
 <HiLockClosed style={{
         fontSize:"2rem"
       }}/>
-<input type="password" placeholder="Password"/>
+<input type="password" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }}/>
       </div>
-      <Button>
+      <Button onClick={loginHandler}>
         LOGIN
       </Button>
       
-      <p> New User ? <a href="http://">Register</a></p>
+      <p> New User ? <Link to="/register">Register</Link></p>
 
       </FormContainer>
     </Container>
