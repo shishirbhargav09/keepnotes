@@ -50,5 +50,17 @@ display: flex;
     align-items: center;
    gap: 1rem;
  }
+ @media only screen and (max-width: 630px) {
+    display: flex;
+    flex-direction: column;
+    .right{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .left{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+ }
  
 `

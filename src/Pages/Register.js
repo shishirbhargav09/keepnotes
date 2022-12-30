@@ -8,32 +8,31 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const registerHandler=(e) => {
-        // e.preventDefault();
-        axios.post('http://localhost:3000/register', {
-            username: username,
-            email: email,
-            password: password
-          })
-          .then(function (response) {
-            console.log(response);
-            toast.success("Successfully Registered");
-            navigate('/login')
-
-          })
-          .catch(function (error) {
-            console.log(error);
-            toast.error("User Already Exist!!!")
-          });
-          setEmail('')
-          setPassword('')
-          setUsername("")
-        
-    }
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const registerHandler = (e) => {
+    // e.preventDefault();
+    axios
+      .post("http://localhost:3000/register", {
+        username: username,
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+        toast.success("Successfully Registered");
+        navigate("/login");
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("User Already Exist!!!");
+      });
+    setEmail("");
+    setPassword("");
+    setUsername("");
+  };
   return (
     <Container>
       <FormContainer>
@@ -49,7 +48,14 @@ function Register() {
               fontSize: "2rem",
             }}
           />
-          <input type="text" placeholder="Name" value={username} onChange={(e) => { setUsername(e.target.value) }} />
+          <input
+            type="text"
+            placeholder="Name"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
         </div>
         <div className="email">
           <MdEmail
@@ -57,7 +63,14 @@ function Register() {
               fontSize: "2rem",
             }}
           />
-          <input type="email" placeholder="Email" value={email} onChange={(e) => { setEmail(e.target.value) }}/>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
         </div>
         <div className="email">
           <HiLockClosed
@@ -65,7 +78,14 @@ function Register() {
               fontSize: "2rem",
             }}
           />
-          <input type="password" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }}/>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </div>
         <Button onClick={registerHandler}>Register</Button>
       </FormContainer>
@@ -115,9 +135,10 @@ const FormContainer = styled.div`
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  height: 90vh;
   width: 100%;
-
+  
+  
   display: flex;
   justify-content: center;
   align-items: center;
