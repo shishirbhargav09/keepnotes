@@ -14,6 +14,7 @@ function App() {
   const isloggedin = useSelector((state) => state.Auth.isloggedin);
 
   const dispatch = useDispatch();
+  if (!isloggedin) {
   const tokeninlocalstorage = localStorage.getItem("token");
     if (tokeninlocalstorage) {
       const userdetails = jwtDecode(tokeninlocalstorage);
@@ -23,6 +24,7 @@ function App() {
       // console.log(tokeninlocalstorage);
       dispatch(login({ useremail, username, userid }));
     }
+  }
   return (
     <div>
       <BrowserRouter>
