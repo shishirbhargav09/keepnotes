@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {BsVectorPen} from 'react-icons/bs'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { logout } from '../Store/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
@@ -59,6 +59,8 @@ const Container = styled.div`
 height: 10vh;
 width: 100%;
 color: aliceblue;
+position: sticky;
+
 display: flex;
 justify-content: space-between;
 /* background-color: cadetblue; */

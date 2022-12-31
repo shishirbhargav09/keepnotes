@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BsPersonCircle, BsFillPersonFill } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
@@ -6,9 +6,17 @@ import { MdEmail } from "react-icons/md";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Register() {
   const navigate = useNavigate();
+  const isloggedin = useSelector((state) => state.Auth.isloggedin);
+  useEffect(() => {
+    if (isloggedin) {
+      navigate("/notes");
+    }
+  }, [isloggedin, navigate]);
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -7,6 +7,7 @@ body {
     background: rgb(66,62,148);
 background: linear-gradient(155deg, rgba(66,62,148,1) 0%, rgba(9,121,99,0.915954415954416) 50%, rgba(0,212,255,1) 100%);
  box-sizing: content-box;
+ background-attachment: fixed;
 }
 a{
   text-decoration: none;

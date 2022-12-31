@@ -52,14 +52,16 @@ function Notes() {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [userId,addnote]);
+
+  
 
   return (
     <Container>
       <h1>Hi {userName} !</h1>
       <label htmlFor="addNotes" />
 
-      <textarea
+      <input
         id="addNotes" placeholder="Write Something Here" value={addnote}
         onChange={(e) => {
           setAddnote(e.target.value);
@@ -70,7 +72,7 @@ function Notes() {
       </Button>
       <div className="cards">
         {notes.map((note) => {
-          return <Card key={note._id} text={note.text} />;
+          return <Card key={note._id} text={note.text}  />;
         })}
       </div>
     </Container>
@@ -115,7 +117,7 @@ const Container = styled.div`
   h1 {
     color: aliceblue;
   }
-  textarea {
+  input {
     max-width: 40rem;
     width: 80%;
     height: 8rem;

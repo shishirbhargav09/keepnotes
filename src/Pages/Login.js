@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
@@ -7,16 +7,24 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import jwtDecode from "jwt-decode";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../Store/authSlice";
 
 
 function Login() {
-  
+  const isloggedin = useSelector((state) => state.Auth.isloggedin);
+
     const dispatch = useDispatch()
     const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    if (isloggedin) {
+      navigate("/notes");
+    }
+  }, [isloggedin, navigate]);
+
+ 
   const loginHandler = (e) => {
     // e.preventDefault();
     axios
