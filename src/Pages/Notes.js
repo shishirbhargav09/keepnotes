@@ -21,20 +21,7 @@ function Notes() {
     }
   }, [isloggedin, navigate]);
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:3000/api/getallnotes", {
-        userid: userId,
-      })
-      .then(function (response) {
-        const Data = response.data;
-        setNotes([...Data]);
-        console.log(Data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+ 
 
   const addnoteHandler = (e) => {
     axios
@@ -52,14 +39,28 @@ function Notes() {
         console.log(error);
       });
   };
+  useEffect(() => {
+    axios
+      .post("http://localhost:3000/api/getallnotes", {
+        userid: userId,
+      })
+      .then(function (response) {
+        const Data = response.data;
+        setNotes([...Data]);
+        console.log(Data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <Container>
-      <h1>HII {userName}</h1>
+      <h1>Hi {userName} !</h1>
       <label htmlFor="addNotes" />
 
       <textarea
-        id="addNotes"
+        id="addNotes" placeholder="Write Something Here" value={addnote}
         onChange={(e) => {
           setAddnote(e.target.value);
         }}
@@ -98,16 +99,18 @@ const Button = styled.button`
 `;
 
 const Container = styled.div`
-  height: 80vh;
+  height: 90vh;
   width: 90vw;
   box-sizing: content-box;
-
+  
   margin: 1rem;
+  margin-top: 2rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  gap: 1rem;
 
   h1 {
     color: aliceblue;
@@ -116,6 +119,7 @@ const Container = styled.div`
     max-width: 40rem;
     width: 80%;
     height: 8rem;
+    padding: 1rem;
     border-radius: 10px;
     box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);
     -webkit-box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);
@@ -127,6 +131,11 @@ const Container = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    overflow: scroll;
+    /* overflow: scroll; */
+    &::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background: #8070d4;
+  border: 6px solid rgba(0, 0, 0, 0.2);
+}
   }
 `;

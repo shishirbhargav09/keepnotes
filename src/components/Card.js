@@ -12,8 +12,9 @@ function Card(props) {
 export default Card
 
 const Container = styled.div`
-width: 10rem;
+width: 15rem;
 height: 5rem;
+padding: 1rem;
 background-color: white;
 margin: 0.5rem;
 overflow-wrap: break-word;
