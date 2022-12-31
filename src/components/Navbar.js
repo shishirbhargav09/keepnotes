@@ -1,8 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 import {BsVectorPen} from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { logout } from '../Store/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-hot-toast'
 function Navbar() {
+  const navigate  = useNavigate()
+  const isloggedin = useSelector(state =>  state.Auth.isloggedin)
+
+  const dispatch = useDispatch()
+  const logoutHandler = (e) => { 
+    dispatch(logout())
+    localStorage.removeItem('token')
+    toast.success("Successfully Logout")
+    navigate('/login')
+
+    }
   return (
     <Container>
        <div className="left">
@@ -12,21 +26,34 @@ function Navbar() {
         <h1>KeepNotes</h1>
        </div>
        <div className="right">
-
-        <Button><Link to="/login">LOGIN</Link></Button>
-        <Button><Link to="/register">REGISTER</Link></Button>
+      {isloggedin && <Button onClick={logoutHandler}>LOGOUT</Button>} 
+        {!isloggedin && <Button onClick={() => { navigate('/login') }}>LOGIN</Button>
+        }
+        {!isloggedin&& <Button onClick={() => { navigate('/register') }}>REGISTER</Button>}
        </div>
     </Container>
   )
 }
 
 export default Navbar
+
 const Button = styled.button`
-    font-size: large;
-    
-    border-radius: 8px;
-    
-`
+  font-size:15px;
+  font-family:Arial;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:#fff;
+  border-color:#18ab29;
+  font-weight:bold;
+  border-radius: 28px;
+  text-shadow: 1px 1px 0px #2f6627;
+  background:#237876;
+  &:hover {
+    cursor: pointer;
+    background-color: #10aab3;
+  }
+`;
 
 const Container = styled.div`
 height: 10vh;

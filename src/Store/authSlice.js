@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isloggedin: false,
   username: "",
+  useremail: "",
   userid: "",
 };
 
@@ -14,6 +15,7 @@ export const authSlice = createSlice({
       
       state.isloggedin = true;
       state.username = action.payload.username;
+      state.useremail = action.payload.useremail;
       state.userid = action.payload.userid;
 
     },
@@ -21,6 +23,7 @@ export const authSlice = createSlice({
       
         state.isloggedin = false;
         state.username = '';
+        state.useremail = '';
         state.userid = '';
   
       },

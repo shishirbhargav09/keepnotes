@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { login } from "../../Store/authSlice";
+import { login } from "../Store/authSlice";
 
 
 function Login() {
@@ -24,15 +24,15 @@ function Login() {
         password: password,
       })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         const token = response.data.token;
         const userdetails = jwtDecode(token);
         const useremail = userdetails.userEmail;
         const username = userdetails.userName;
         const userid = userdetails.userId;
-        console.log(userdetails);
+        // console.log(userdetails);
         dispatch(login({useremail,username,userid}))
-        // localStorage.setItem('useremail', useremail);
+        localStorage.setItem('token', token);
         // localStorage.setItem('userid', userid);
 
         toast.success("Successfully Login");
