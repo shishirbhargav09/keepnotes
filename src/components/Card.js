@@ -1,7 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 import {AiFillDelete} from 'react-icons/ai'
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 function Card(props) {
+  const deleteid =(e) => {
+    axios
+      .post("http://localhost:3000/api/delete", {
+        id: props.id
+      })
+      .then(function (response) {
+        toast.success("Note Deleted Successfully");
+        console.log(response);
+        
+      })
+      .catch(function (error) {
+        toast.error("Something Went Wrong");
+        console.log(error);
+      });
+  }
+
   return (
     <Container>
         <p>{props.text}</p>
@@ -9,7 +27,7 @@ function Card(props) {
           fontSize:"25px",
           color:"crimson"
           
-        }} />
+        }}  onClick={deleteid} />
     </Container>
   )
 }

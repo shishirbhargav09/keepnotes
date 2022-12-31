@@ -9,12 +9,13 @@ import Card from "../components/Card";
 function Notes() {
   const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
+  const [note, setNote] = useState([]);
   const [addnote, setAddnote] = useState("");
 
   const userName = useSelector((state) => state.Auth.username);
   const userId = useSelector((state) => state.Auth.userid);
   const isloggedin = useSelector((state) => state.Auth.isloggedin);
-
+  
   useEffect(() => {
     if (!isloggedin) {
       navigate("/login");
@@ -33,6 +34,7 @@ function Notes() {
         toast.success("Note Added Successfully");
         console.log(response);
         setAddnote("");
+        setNote([...notes])
       })
       .catch(function (error) {
         toast.error("Something Went Wrong");
@@ -52,7 +54,7 @@ function Notes() {
       .catch(function (error) {
         console.log(error);
       });
-  }, [userId,addnote]);
+  }, [userId,note]);
 
   
 
@@ -72,7 +74,7 @@ function Notes() {
       </Button>
       <div className="cards">
         {notes.map((note) => {
-          return <Card key={note._id} text={note.text}  />;
+          return <Card key={note._id} id={note._id} text={note.text}   />;
         })}
       </div>
     </Container>
@@ -85,8 +87,9 @@ const Button = styled.button`
   font-size: 15px;
   font-family: Arial;
   margin-top: 1rem;
-  width: 140px;
-  height: 50px;
+  width:140px;
+  min-height: 50px;
+  height:50px;
   border-width: 1px;
   color: #fff;
   border-color: #18ab29;
@@ -120,7 +123,8 @@ const Container = styled.div`
   input {
     max-width: 40rem;
     width: 80%;
-    height: 8rem;
+    height: 3rem;
+    font-size: large;
     padding: 1rem;
     border-radius: 10px;
     box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);

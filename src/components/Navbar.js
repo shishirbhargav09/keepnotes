@@ -59,7 +59,7 @@ const Container = styled.div`
 height: 10vh;
 width: 100%;
 color: aliceblue;
-position: sticky;
+  
 
 display: flex;
 justify-content: space-between;
