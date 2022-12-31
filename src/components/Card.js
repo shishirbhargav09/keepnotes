@@ -1,11 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
 
 function Card(props) {
   return (
-    <div>
+    <Container>
         <p>{props.text}</p>
-    </div>
+    </Container>
   )
 }
 
 export default Card
+
+const Container = styled.div`
+width: 10rem;
+height: 5rem;
+background-color: white;
+margin: 0.5rem;
+overflow-wrap: break-word;
+border-radius: 10px;
+  box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);
+  -webkit-box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);
+  -moz-box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);
+`
