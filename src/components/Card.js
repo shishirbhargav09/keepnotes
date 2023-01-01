@@ -3,21 +3,15 @@ import styled from 'styled-components'
 import {AiFillDelete} from 'react-icons/ai'
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteNote } from '../Store/notesSlice';
 function Card(props) {
+  const dispatch = useDispatch()
+  const userId = useSelector((state) => state.Auth.userid);
+  
   const deleteid =(e) => {
-    axios
-      .post("http://localhost:3000/api/delete", {
-        id: props.id
-      })
-      .then(function (response) {
-        toast.success("Note Deleted Successfully");
-        console.log(response);
-        
-      })
-      .catch(function (error) {
-        toast.error("Something Went Wrong");
-        console.log(error);
-      });
+   dispatch(deleteNote({id:props.id,
+  userid:userId}))
   }
 
   return (

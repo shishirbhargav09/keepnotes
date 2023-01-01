@@ -1,10 +1,12 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
+import { addNote, getNotes } from "../Store/notesSlice";
 
 function Notes() {
   const navigate = useNavigate();
@@ -13,8 +15,10 @@ function Notes() {
   const [addnote, setAddnote] = useState("");
 
   const userName = useSelector((state) => state.Auth.username);
+  const allnotes = useSelector((state) => state.Notes.notes);
   const userId = useSelector((state) => state.Auth.userid);
   const isloggedin = useSelector((state) => state.Auth.isloggedin);
+  const dispatch = useDispatch()
   
   useEffect(() => {
     if (!isloggedin) {
@@ -25,36 +29,35 @@ function Notes() {
  
 
   const addnoteHandler = (e) => {
-    axios
-      .post("http://localhost:3000/api/postnotes", {
-        userid: userId,
-        text: addnote,
-      })
-      .then(function (response) {
-        toast.success("Note Added Successfully");
-        console.log(response);
-        setAddnote("");
-        setNote([...notes])
-      })
-      .catch(function (error) {
-        toast.error("Something Went Wrong");
-        console.log(error);
-      });
+    dispatch(addNote({userid: userId, text:addnote}))
+    // axios
+    //   .post("http://localhost:3000/api/postnotes", {
+    //     userid: userId,
+    //     text: addnote,
+    //   })
+    //   .then(function (response) {
+    //     toast.success("Note Added Successfully");
+    //     console.log(response);
+    //     setAddnote("");
+    //     setNote([...notes])
+    //   })
+    //   .catch(function (error) {
+    //     toast.error("Something Went Wrong");
+    //     console.log(error);
+    //   });
   };
+  // const tokeninlocalstorage = localStorage.getItem("token");
+  
+  //   const userdetails = jwtDecode(tokeninlocalstorage);
+  //   const useremail = userdetails.userEmail;
+  //   const username = userdetails.userName;
+  //   const userid = userdetails.userId;
+    // console.log(tokeninlocalstorage);
+    // dispatch(login({ useremail, username, userid }));
+  
   useEffect(() => {
-    axios
-      .post("http://localhost:3000/api/getallnotes", {
-        userid: userId,
-      })
-      .then(function (response) {
-        const Data = response.data;
-        setNotes([...Data]);
-        console.log(Data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [userId,note]);
+    dispatch(getNotes(userId))
+  }, []);
 
   
 
@@ -73,7 +76,7 @@ function Notes() {
         ADD NOTE
       </Button>
       <div className="cards">
-        {notes.map((note) => {
+        {allnotes.map((note) => {
           return <Card key={note._id} id={note._id} text={note.text}   />;
         })}
       </div>
