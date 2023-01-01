@@ -4,23 +4,69 @@ import styled from "styled-components";
 function Home() {
   return (
     <Container>
+        <Rocket>🚀</Rocket>
       <div className="focus-in-contract-bck">
-        <h2>🚀Boost Happiness Productivity and Creativity</h2>
+        <h2>Boost Happiness, Productivity and Creativity</h2>
       </div>
     </Container>
   );
 }
 
 export default Home;
+const Rocket = styled.div`
+font-size: 5rem;
+animation: myAnim 13s ease 0s infinite alternate none;
+@keyframes myAnim {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+
+	10%,
+	30%,
+	50%,
+	70% {
+		transform: translateY(-8px);
+	}
+
+	20%,
+	40%,
+	60% {
+		transform: translateY(8px);
+	}
+
+	80% {
+		transform: translateY(6.4px);
+	}
+
+	90% {
+		transform: translateY(-6.4px);
+	}
+}
+
+ 
+`
 
 const Container = styled.div`
   height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+
   h2{
-    font-size: 100px;
+    
+    font-size: 3rem;
     color: white;
   }
   .focus-in-contract-bck {
+    padding: 0.5rem;
+    margin: 1rem;
+    width: 90%;
+    max-width: 50rem;
     padding: 2rem;
     -webkit-animation: focus-in-contract-bck 1s
       cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
