@@ -1,5 +1,4 @@
-import axios from "axios";
-import jwtDecode from "jwt-decode";
+
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +9,7 @@ import { addNote, getNotes } from "../Store/notesSlice";
 
 function Notes() {
   const navigate = useNavigate();
-  const [notes, setNotes] = useState([]);
-  const [note, setNote] = useState([]);
+  
   const [addnote, setAddnote] = useState("");
 
   const userName = useSelector((state) => state.Auth.username);
@@ -29,9 +27,14 @@ function Notes() {
  
 
   const addnoteHandler = (e) => {
-    dispatch(addNote({userid: userId, text:addnote}))
+    if (addnote.length===0) {
+      toast.error("Please Add Valid Text")
+    }
+    if (addnote.length>0) {
+      dispatch(addNote({userid: userId, text:addnote}), toast.success("Note Added Successfully"))
     
-        toast.success("Note Added Successfully");
+    }
+       
   
         setAddnote("");
     
@@ -39,7 +42,7 @@ function Notes() {
   
   useEffect(() => {
     dispatch(getNotes(userId))
-  }, []);
+  }, [dispatch,userId]);
 
   
 

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {AiFillDelete} from 'react-icons/ai'
 import { toast } from 'react-hot-toast';
-import axios from 'axios';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteNote } from '../Store/notesSlice';
 function Card(props) {
