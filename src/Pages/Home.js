@@ -15,6 +15,7 @@ function Home() {
 export default Home;
 const Rocket = styled.div`
 font-size: 5rem;
+margin-top: 3rem;
 animation: myAnim 13s ease 0s infinite alternate none;
 @keyframes myAnim {
 	0%,
@@ -64,7 +65,7 @@ const Container = styled.div`
   }
   .focus-in-contract-bck {
     padding: 0.5rem;
-    margin: 1rem;
+    margin: 0.5rem;
     width: 90%;
     max-width: 50rem;
     padding: 2rem;
