@@ -30,30 +30,12 @@ function Notes() {
 
   const addnoteHandler = (e) => {
     dispatch(addNote({userid: userId, text:addnote}))
-    // axios
-    //   .post("http://localhost:3000/api/postnotes", {
-    //     userid: userId,
-    //     text: addnote,
-    //   })
-    //   .then(function (response) {
-    //     toast.success("Note Added Successfully");
-    //     console.log(response);
-    //     setAddnote("");
-    //     setNote([...notes])
-    //   })
-    //   .catch(function (error) {
-    //     toast.error("Something Went Wrong");
-    //     console.log(error);
-    //   });
-  };
-  // const tokeninlocalstorage = localStorage.getItem("token");
+    
+        toast.success("Note Added Successfully");
   
-  //   const userdetails = jwtDecode(tokeninlocalstorage);
-  //   const useremail = userdetails.userEmail;
-  //   const username = userdetails.userName;
-  //   const userid = userdetails.userId;
-    // console.log(tokeninlocalstorage);
-    // dispatch(login({ useremail, username, userid }));
+        setAddnote("");
+    
+  };
   
   useEffect(() => {
     dispatch(getNotes(userId))

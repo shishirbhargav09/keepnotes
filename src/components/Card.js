@@ -11,7 +11,8 @@ function Card(props) {
   
   const deleteid =(e) => {
    dispatch(deleteNote({id:props.id,
-  userid:userId}))
+  userid:userId}),
+  toast.success("Deleted Successfully"))
   }
 
   return (
@@ -35,6 +36,8 @@ height: 5rem;
 padding: 1rem;
 background-color: white;
 margin: 0.5rem;
+box-sizing: content-box;
+overflow-y: scroll;
 overflow-wrap: break-word;
 border-radius: 10px;
   box-shadow: 6px 5px 18px 0px rgba(0, 0, 0, 0.73);

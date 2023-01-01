@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const initialState = {
   notes: [],
@@ -30,7 +31,7 @@ export const getNotes = createAsyncThunk("notes/fetchAll", async (userid) => {
 export const deleteNote = createAsyncThunk("notes/delete", async ({id,userid}) => {
   await axios.post("http://localhost:3000/api/delete", {
     id
-  });
+  })
 
   const { data } = await axios.post("http://localhost:3000/api/getallnotes", {
     userid
