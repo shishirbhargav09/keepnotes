@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import jwtDecode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../Store/authSlice";
+import { BASE_URL } from "../utils/constant";
 
 
 function Login() {
@@ -28,7 +29,7 @@ function Login() {
   const loginHandler = (e) => {
     // e.preventDefault();
     axios
-      .post("http://localhost:3000/login", {
+      .post(`${BASE_URL}/login`, {
         email: email,
         password: password,
       })

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "../utils/constant";
 
 const initialState = {
   notes: [],
@@ -22,28 +23,28 @@ export const notesSlice = createSlice({
 });
 
 export const getNotes = createAsyncThunk("notes/fetchAll", async (userid) => {
-  const { data } = await axios.post("http://localhost:3000/api/getallnotes", {
+  const { data } = await axios.post(`${BASE_URL}/api/getallnotes`, {
     userid,
   });
   return data;
 });
 export const deleteNote = createAsyncThunk("notes/delete", async ({id,userid}) => {
-  await axios.post("http://localhost:3000/api/delete", {
+  await axios.post(`${BASE_URL}/api/delete`, {
     id
   })
 
-  const { data } = await axios.post("http://localhost:3000/api/getallnotes", {
+  const { data } = await axios.post(`${BASE_URL}/api/getallnotes`, {
     userid
   });
 
   return data;
 });
 export const addNote = createAsyncThunk("notes/addNote", async ({userid,text}) => {
-  await axios.post("http://localhost:3000/api/postnotes", {
+  await axios.post(`${BASE_URL}/api/postnotes`, {
     userid,text
   });
 
-  const { data } = await axios.post("http://localhost:3000/api/getallnotes", {
+  const { data } = await axios.post(`${BASE_URL}/api/getallnotes`, {
     userid
   });
 

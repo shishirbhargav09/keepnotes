@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { BASE_URL } from "../utils/constant";
 
 function Register() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Register() {
   const registerHandler = (e) => {
     // e.preventDefault();
     axios
-      .post("http://localhost:3000/register", {
+      .post(`${BASE_URL}/register`, {
         username: username,
         email: email,
         password: password,

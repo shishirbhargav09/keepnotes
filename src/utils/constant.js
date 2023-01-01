@@ -1,0 +1,1 @@
+export const BASE_URL =  "https://keepnotes-api-shishirbhargav09.vercel.app"
