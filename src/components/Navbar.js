@@ -22,8 +22,8 @@ function Navbar() {
        <div className="left">
 <BsVectorPen style={{
         fontSize:"2rem",
-        }}/>
-        <h1>KeepNotes</h1>
+        }} onClick={() => { navigate('/') }}/>
+        <h1 onClick={() => { navigate('/') }}>KeepNotes</h1>
        </div>
        <div className="right">
       {isloggedin && <Button onClick={logoutHandler}>LOGOUT</Button>} 
