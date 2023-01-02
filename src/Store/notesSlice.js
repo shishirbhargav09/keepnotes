@@ -4,6 +4,8 @@ import { BASE_URL } from "../utils/constant";
 
 const initialState = {
   notes: [],
+  loading: false,
+
 };
 
 export const notesSlice = createSlice({
@@ -12,12 +14,24 @@ export const notesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getNotes.fulfilled, (state, action) => {
       state.notes = action.payload;
+      state.loading = false;
     });
     builder.addCase(deleteNote.fulfilled, (state, action) => {
       state.notes = action.payload;
+      state.loading = false;
     });
     builder.addCase(addNote.fulfilled, (state, action) => {
       state.notes = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getNotes.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteNote.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(addNote.pending, (state, action) => {
+      state.loading = true;
     });
   },
 });

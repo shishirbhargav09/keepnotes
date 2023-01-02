@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
+import Loader from "../components/Loader";
 import { addNote, getNotes } from "../Store/notesSlice";
 
 function Notes() {
   const navigate = useNavigate();
+  const showloading = useSelector((state)=> state.Notes.loading);
   
   const [addnote, setAddnote] = useState("");
 
@@ -19,6 +21,7 @@ function Notes() {
   const dispatch = useDispatch()
   
   useEffect(() => {
+    
     if (!isloggedin) {
       navigate("/login");
     }
@@ -42,6 +45,7 @@ function Notes() {
   
   useEffect(() => {
     dispatch(getNotes(userId))
+   
   }, [dispatch,userId]);
 
   
@@ -60,6 +64,10 @@ function Notes() {
       <Button onClick={addnoteHandler} value={addnote}>
         ADD NOTE
       </Button>
+      {showloading&&  <Loader/>}
+
+    
+
       <div className="cards">
         {allnotes.map((note) => {
           return <Card key={note._id} id={note._id} text={note.text}   />;

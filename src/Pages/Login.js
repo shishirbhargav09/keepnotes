@@ -13,7 +13,7 @@ import { BASE_URL } from "../utils/constant";
 import Loader from "../components/Loader";
 
 function Login() {
-  const isloggedin = useSelector((state) => state.Auth.isloggedin);
+  const {isloggedin} = useSelector((state) => state.Auth.isloggedin);
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,14 +45,16 @@ function Login() {
         localStorage.setItem("token", token);
         // localStorage.setItem('userid', userid);
 
+        setLoader(false);
         toast.success("Successfully Login");
         navigate("/notes");
       })
       .catch(function (error) {
         console.log(error);
         toast.error("Wrong Credintials");
-      });
       setLoader(false);
+
+      });
   };
   return (
     <Container>
@@ -95,7 +97,9 @@ function Login() {
           />
         </div>
         <Button onClick={loginHandler}>LOGIN</Button>
-        <Loader/>
+        {
+          loader && <Loader/>
+        }
         
 
         <p>

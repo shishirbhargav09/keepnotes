@@ -10,8 +10,8 @@ function Loader() {
    const Container = styled.div`
    
    .custom-loader {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   padding: 0.2rem;
   display: grid;
   animation: s4 4s infinite;
