@@ -8,8 +8,11 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constant";
+import Loader from "../components/Loader";
 
 function Register() {
+  const [loader, setLoader] = useState(false);
+
   const navigate = useNavigate();
   const isloggedin = useSelector((state) => state.Auth.isloggedin);
   useEffect(() => {
@@ -22,6 +25,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const registerHandler = (e) => {
+    setLoader(true)
     // e.preventDefault();
     axios
       .post(`${BASE_URL}/register`, {
@@ -30,12 +34,14 @@ function Register() {
         password: password,
       })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
+        setLoader(false);
         toast.success("Successfully Registered");
         navigate("/login");
       })
       .catch(function (error) {
-        console.log(error);
+        setLoader(false);
+        // console.log(error);
         toast.error("User Already Exist!!!");
       });
     setEmail("");
@@ -97,6 +103,9 @@ function Register() {
           />
         </div>
         <Button onClick={registerHandler}>Register</Button>
+        {
+          loader && <Loader/>
+        }
       </FormContainer>
     </Container>
   );
