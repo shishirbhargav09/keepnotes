@@ -71,6 +71,10 @@ display: flex;
     justify-content: center;
     align-items: center;
    gap: 1rem;
+   &:hover {
+    cursor: pointer;
+    
+  }
  }
  .right{
     padding-right: 5rem;
@@ -81,12 +85,18 @@ display: flex;
  }
  @media only screen and (max-width: 630px) {
     display: flex;
+flex-direction: column;
+align-items: center;
+    
+height: 20vh;
+
     flex-direction: column;
     .right{
         padding-left: 2rem;
         padding-right: 2rem;
     }
     .left{
+      
         padding-left: 2rem;
         padding-right: 2rem;
     }

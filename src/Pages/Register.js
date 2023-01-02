@@ -106,6 +106,8 @@ export default Register;
 const Button = styled.button`
   margin: 1rem;
   width: 60%;
+  height: 40px;
+
   color: white;
   border-radius: 5px;
 
@@ -118,6 +120,7 @@ const Button = styled.button`
 const FormContainer = styled.div`
   background-color: white;
   width: 90%;
+  
   max-width: 30rem;
   display: flex;
   justify-content: center;

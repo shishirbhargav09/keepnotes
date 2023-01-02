@@ -10,13 +10,13 @@ import jwtDecode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../Store/authSlice";
 import { BASE_URL } from "../utils/constant";
-
+import Loader from "../components/Loader";
 
 function Login() {
   const isloggedin = useSelector((state) => state.Auth.isloggedin);
-
-    const dispatch = useDispatch()
-    const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
@@ -25,9 +25,9 @@ function Login() {
     }
   }, [isloggedin, navigate]);
 
- 
   const loginHandler = (e) => {
     // e.preventDefault();
+    setLoader(true);
     axios
       .post(`${BASE_URL}/login`, {
         email: email,
@@ -41,17 +41,18 @@ function Login() {
         const username = userdetails.userName;
         const userid = userdetails.userId;
         // console.log(userdetails);
-        dispatch(login({useremail,username,userid}))
-        localStorage.setItem('token', token);
+        dispatch(login({ useremail, username, userid }));
+        localStorage.setItem("token", token);
         // localStorage.setItem('userid', userid);
 
         toast.success("Successfully Login");
-        navigate('/notes')
+        navigate("/notes");
       })
       .catch(function (error) {
         console.log(error);
         toast.error("Wrong Credintials");
       });
+      setLoader(false);
   };
   return (
     <Container>
@@ -94,6 +95,8 @@ function Login() {
           />
         </div>
         <Button onClick={loginHandler}>LOGIN</Button>
+        <Loader/>
+        
 
         <p>
           {" "}
@@ -108,6 +111,7 @@ export default Login;
 const Button = styled.button`
   margin: 1rem;
   width: 60%;
+  height: 40px;
   color: white;
   border-radius: 5px;
 
@@ -142,14 +146,20 @@ const FormContainer = styled.div`
       border-radius: 5px;
       padding-left: 1rem;
     }
+
   }
+ 
 `;
 
 const Container = styled.div`
   height: 90vh;
   width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  
 
   display: flex;
   justify-content: center;
   align-items: center;
+ 
 `;

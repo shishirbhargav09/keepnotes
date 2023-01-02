@@ -49,7 +49,7 @@ function Notes() {
   return (
     <Container>
       <h1>Hi {userName} !</h1>
-      <label htmlFor="addNotes" />
+      
 
       <input
         id="addNotes" placeholder="Write Something Here" value={addnote}
@@ -96,8 +96,9 @@ const Container = styled.div`
   width: 90vw;
   box-sizing: content-box;
   
-  margin: 1rem;
-  margin-top: 2rem;
+  margin: 0.5rem;
+
+  
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -107,6 +108,7 @@ const Container = styled.div`
 
   h1 {
     color: aliceblue;
+    
   }
   input {
     max-width: 40rem;
